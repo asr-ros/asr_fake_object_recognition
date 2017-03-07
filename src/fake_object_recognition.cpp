@@ -29,7 +29,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 //Eigen
 #include <Eigen/Geometry>
 
-#include "object_database/ObjectMetaData.h"
+#include "asr_object_database/ObjectMetaData.h"
 #include "ApproxMVBB/ComputeApproxMVBB.hpp"
 
 namespace fake_object_recognition {
@@ -73,8 +73,8 @@ FakeObjectRecognition::FakeObjectRecognition() : nh_(NODE_NAME), config_changed_
     // initialize bounding boxes and normals:
     ROS_DEBUG_STREAM("Initializing object bounding boxes and normals");
     // Set up service to get normals:
-    ros::service::waitForService("/object_database/object_meta_data");
-    object_metadata_service_client_ = nh_.serviceClient<object_database::ObjectMetaData>("/object_database/object_meta_data");
+    ros::service::waitForService("/asr_object_database/object_meta_data");
+    object_metadata_service_client_ = nh_.serviceClient<asr_object_database::ObjectMetaData>("/asr_object_database/object_meta_data");
     // Set bounding box corner point filename:
     bb_corners_file_name_ = ros::package::getPath("asr_fake_object_recognition") + "/config/bounding_box_corners.xml";
 
@@ -653,7 +653,7 @@ std::vector<geometry_msgs::Point> FakeObjectRecognition::getNormals(const Object
     // init normals: (similar to next_best_view ObjectHelper.h)
     std::vector<geometry_msgs::Point> temp_normals = std::vector<geometry_msgs::Point>();
 
-    // Takes the mesh file path and cuts off the beginning ("package://object_database/rsc/database/")
+    // Takes the mesh file path and cuts off the beginning ("package://asr_object_database/rsc/database/")
     // and everything after the next "_", leaving only the recognizer name of the object.
     std::vector<std::string> strvec;
     std::string in = object.getMeshName();
@@ -663,11 +663,11 @@ std::vector<geometry_msgs::Point> FakeObjectRecognition::getNormals(const Object
     std::string recognizer = strvec.at(6);
 
     // Get the object's meta data containing the normals:
-    object_database::ObjectMetaData objectMetaData;
+    asr_object_database::ObjectMetaData objectMetaData;
     objectMetaData.request.object_type = object.getType();
     objectMetaData.request.recognizer = recognizer;
 
-    if (!object_metadata_service_client_.exists()) { ROS_DEBUG_STREAM("/object_database/object_meta_data service is not available"); }
+    if (!object_metadata_service_client_.exists()) { ROS_DEBUG_STREAM("/asr_object_database/object_meta_data service is not available"); }
     else {
         object_metadata_service_client_.call(objectMetaData);
         if (!objectMetaData.response.is_valid) { ROS_DEBUG_STREAM("objectMetadata response is not valid for object type " << object.getType()); }
@@ -756,7 +756,7 @@ std::array<geometry_msgs::Point, 8> FakeObjectRecognition::calculateBB(const Obj
     * If no bounding box could be found, a vector containing only the object's center 8 times is used.
     * Result is written to file bb_corners_file_name_.*/
     // Get mesh input file:
-    std::string mesh_path = ros::package::getPath("object_database") + object.getMeshName().substr(25); // cuts off "package://object_database" from object's meshName
+    std::string mesh_path = ros::package::getPath("asr_object_database") + object.getMeshName().substr(25); // cuts off "package://asr_object_database" from object's meshName
     ROS_DEBUG_STREAM("Looking for mesh in: " << mesh_path);
 
     // Parse the input file:
