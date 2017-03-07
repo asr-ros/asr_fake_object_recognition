@@ -24,7 +24,7 @@ find_package(catkin REQUIRED COMPONENTS
   tf
   asr_msgs
   cmake_modules
-  rapidxml
+  asr_rapidxml
   object_database
 )
 
@@ -48,7 +48,7 @@ generate_messages(
 
 catkin_package(
     INCLUDE_DIRS include
-    CATKIN_DEPENDS dynamic_reconfigure std_msgs roscpp roslib asr_msgs rapidxml
+    CATKIN_DEPENDS dynamic_reconfigure std_msgs roscpp roslib asr_msgs asr_rapidxml
     DEPENDS Eigen
 )
 
