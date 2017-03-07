@@ -1,0 +1,6 @@
+<Objects>
+  <Object type="CoffeeBox" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/CoffeeBox/CoffeeBox.dae">-0.23449,0.502253,0.684928,0.695642,-0.702896,-0.102412,0.107386 </Object>
+  <Object type="Knaeckebrot" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/Knaeckebrot/Knaeckebrot.dae">-0.1348,0.925554,0.706798,0.527497,-0.510845,-0.479758,0.480226 </Object>
+  <Object type="Smacks" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/Smacks/Smacks.dae">-0.466766,0.447921,0.772829,0.665217,-0.640295,0.275292,-0.267811 </Object>
+  <Object type="VitalisSchoko" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/VitalisSchoko/VitalisSchoko.dae">-0.147213,0.766054,0.750481,0.524997,-0.525439,-0.481436,0.465308 </Object>
+  </Objects>

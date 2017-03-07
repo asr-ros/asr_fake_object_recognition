@@ -1,0 +1,25 @@
+<launch>
+	<env name="ROSCONSOLE_CONFIG_FILE" value="$(find asr_fake_object_recognition)/log/rosconsole.config"/>
+  	<node name="asr_fake_object_recognition" pkg="asr_fake_object_recognition" type="asr_fake_object_recognition" output="screen">
+	  <rosparam file="$(find asr_next_best_view)/rsc/next_best_view_settings_sim.yaml" />
+	  <rosparam file="$(find asr_fake_object_recognition)/config/params.yaml" />
+  	
+	    <param name="frustum_mode" value="0"/>
+	    <param name="use_camera_pose" value="True"/>
+	    <param name="use_pose_invalidation" value="False"/>
+	    <param name="prob_pose_invalidation" value="0.01"/>
+	    <param name="use_position_noise" value="False"/>
+	    <param name="pos_noise_normal_dist_mean" value="0.0"/>
+	    <param name="pos_noise_normal_dist_dev" value="0.001"/>
+	    <param name="use_orientation_noise" value="False"/>
+	    <param name="or_x_noise_normal_dist_mean" value="0.0"/>
+	    <param name="or_x_noise_normal_dist_dev" value="0.01"/>
+	    <param name="or_y_noise_normal_dist_mean" value="0.0"/>
+	    <param name="or_y_noise_normal_dist_dev" value="0.01"/>
+	    <param name="or_z_noise_normal_dist_mean" value="0.0"/>
+	    <param name="or_z_noise_normal_dist_dev" value="0.01"/>
+  	
+  	</node>
+	<node name="asr_object_database" type="asr_object_database" pkg="asr_object_database" output="screen" />
+
+</launch>

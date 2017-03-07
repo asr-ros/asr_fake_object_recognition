@@ -1,0 +1,38 @@
+<Objects>
+<Object type="Cup" id="011021054100" mesh="package://asr_object_database/rsc/databases/segmentable_objects/Cup/object.dae" angles="euler">0.4,-0.04,1.51,-90,0,0 </Object>
+<Object type="Cup" id="011021054100" mesh="package://asr_object_database/rsc/databases/segmentable_objects/Cup/object.dae" angles="euler">0.45,-0.04,1.51,-90,0,0 </Object>
+<Object type="Cup" id="011021054100" mesh="package://asr_object_database/rsc/databases/segmentable_objects/Cup/object.dae" angles="euler">0.5,-0.04,1.51,-90,0,0 </Object>
+<Object type="Cup" id="011021054100" mesh="package://asr_object_database/rsc/databases/segmentable_objects/Cup/object.dae" angles="euler">0.6,-0.04,1.51,-90,0,0 </Object>
+<Object type="Cup" id="011021054100" mesh="package://asr_object_database/rsc/databases/segmentable_objects/Cup/object.dae" angles="euler">0.7,-0.04,1.51,-90,0,0 </Object>
+<Object type="Cup" id="011021054100" mesh="package://asr_object_database/rsc/databases/segmentable_objects/Cup/object.dae" angles="euler">0.8,-0.04,1.51,-90,0,0 </Object>
+<Object type="Cup" id="011021054100" mesh="package://asr_object_database/rsc/databases/segmentable_objects/Cup/object.dae" angles="euler">0.9,-0.04,1.51,-90,0,0 </Object>
+<Object type="Cup" id="011021054100" mesh="package://asr_object_database/rsc/databases/segmentable_objects/Cup/object.dae" angles="euler">1.0,-0.04,1.51,-90,0,0 </Object>
+<Object type="Cup" id="011021054100" mesh="package://asr_object_database/rsc/databases/segmentable_objects/Cup/object.dae" angles="euler">1.1,-0.04,1.51,-90,0,0 </Object>
+<Object type="Cup" id="011021054100" mesh="package://asr_object_database/rsc/databases/segmentable_objects/Cup/object.dae" angles="euler">1.2,-0.04,1.51,-90,0,0 </Object>
+<Object type="Cup" id="011021054100" mesh="package://asr_object_database/rsc/databases/segmentable_objects/Cup/object.dae" angles="euler">1.3,-0.04,1.51,-90,0,0 </Object>
+<Object type="Cup" id="011021054100" mesh="package://asr_object_database/rsc/databases/segmentable_objects/Cup/object.dae" angles="euler">1.4,-0.04,1.51,-90,0,0 </Object>
+<Object type="Cup" id="011021054100" mesh="package://asr_object_database/rsc/databases/segmentable_objects/Cup/object.dae" angles="euler">1.45,-0.04,1.51,-90,0,0 </Object>
+<Object type="Cup" id="011021054100" mesh="package://asr_object_database/rsc/databases/segmentable_objects/Cup/object.dae" angles="euler">1.5,-0.04,1.51,-90,0,0 </Object>
+
+<Object type="PlateDeep" id="016054023100" mesh="package://asr_object_database/rsc/databases/segmentable_objects/PlateDeep/object.dae" angles="euler">1.5,-0.04,1.2,-90,0,0 </Object>
+<Object type="PlateDeep" id="016054023100" mesh="package://asr_object_database/rsc/databases/segmentable_objects/PlateDeep/object.dae" angles="euler">1.5,-0.04,1.3,-90,0,0 </Object>
+<Object type="PlateDeep" id="016054023100" mesh="package://asr_object_database/rsc/databases/segmentable_objects/PlateDeep/object.dae" angles="euler">1.5,-0.04,1.4,-90,0,0 </Object>
+<Object type="PlateDeep" id="016054023100" mesh="package://asr_object_database/rsc/databases/segmentable_objects/PlateDeep/object.dae" angles="euler">1.5,-0.04,1.5,-90,0,0 </Object>
+<Object type="PlateDeep" id="016054023100" mesh="package://asr_object_database/rsc/databases/segmentable_objects/PlateDeep/object.dae" angles="euler">1.5,-0.04,1.6,-90,0,0 </Object>
+<Object type="PlateDeep" id="016054023100" mesh="package://asr_object_database/rsc/databases/segmentable_objects/PlateDeep/object.dae" angles="euler">1.5,-0.04,1.7,-90,0,0 </Object>
+<Object type="PlateDeep" id="016054023100" mesh="package://asr_object_database/rsc/databases/segmentable_objects/PlateDeep/object.dae" angles="euler">1.5,-0.04,1.8,-90,0,0 </Object>
+
+<Object type="CoffeeBox" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/CoffeeBox/CoffeeBox.dae" angles="euler">1.5,-0.5,1.5,90,0,0 </Object>
+<Object type="CoffeeBox" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/CoffeeBox/CoffeeBox.dae" angles="euler">1.5,-0.4,1.5,90,0,0 </Object>
+<Object type="CoffeeBox" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/CoffeeBox/CoffeeBox.dae" angles="euler">1.5,-0.3,1.5,90,0,0 </Object>
+<Object type="CoffeeBox" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/CoffeeBox/CoffeeBox.dae" angles="euler">1.5,-0.2,1.5,90,0,0 </Object>
+<Object type="CoffeeBox" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/CoffeeBox/CoffeeBox.dae" angles="euler">1.5,-0.1,1.5,90,0,0 </Object>
+<Object type="CoffeeBox" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/CoffeeBox/CoffeeBox.dae" angles="euler">1.5,-0.04,1.5,90,0,0 </Object>
+<Object type="CoffeeBox" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/CoffeeBox/CoffeeBox.dae" angles="euler">1.5,0.0,1.5,90,0,0 </Object>
+<Object type="CoffeeBox" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/CoffeeBox/CoffeeBox.dae" angles="euler">1.5,0.04,1.5,90,0,0 </Object>
+<Object type="CoffeeBox" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/CoffeeBox/CoffeeBox.dae" angles="euler">1.5,0.14,1.5,90,0,0 </Object>
+<Object type="CoffeeBox" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/CoffeeBox/CoffeeBox.dae" angles="euler">1.5,0.24,1.5,90,0,0 </Object>
+<Object type="CoffeeBox" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/CoffeeBox/CoffeeBox.dae" angles="euler">1.5,0.34,1.5,90,0,0 </Object>
+<Object type="CoffeeBox" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/CoffeeBox/CoffeeBox.dae" angles="euler">1.5,0.44,1.5,90,0,0 </Object>
+
+</Objects>

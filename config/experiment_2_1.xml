@@ -1,0 +1,8 @@
+<Objects>
+<Object type="CoffeeFilters2" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/CoffeeFilters2/CoffeeFilters2.dae">-1.67296,-1.63715,0.71941,-0.114437,0.115244,0.707371,-0.687931 </Object>
+<Object type="CoffeeBox" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/CoffeeBox/CoffeeBox.dae">-1.53872,-1.7372,0.696828,-0.192911,0.196114,0.681691,-0.677954 </Object>
+<Object type="Cup" id="054012012100" mesh="package://asr_object_database/rsc/databases/segmentable_objects/Cup/object.dae">0.376412,-1.26304,0.667849,0.478306,-0.487471,0.520728,-0.512286 </Object>
+<Object type="PlateDeep" id="016054023100" mesh="package://asr_object_database/rsc/databases/segmentable_objects/PlateDeep/object.dae">0.231811,-1.11882,0.650608,0.514263,-0.504086,0.484126,-0.497044 </Object>
+<Object type="Smacks" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/Smacks/Smacks.dae">-0.186915,0.657708,0.770211,0.717287,-0.696126,-0.0139575,0.0266874 </Object>
+<Object type="VitalisSchoko" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/VitalisSchoko/VitalisSchoko.dae">0.010769,0.651499,0.740899,0.69852,-0.715564,0.00546526,0.0029201 </Object>
+</Objects>
