@@ -33,6 +33,11 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 #include <asr_fake_object_recognition/FakeObjectRecognitionConfig.h>
 #include <error_simulation.h>
 #include <std_msgs/ColorRGBA.h>
+#include <geometry_msgs/Point.h>
+//Eigen
+#include <Eigen/Geometry>
+
+#include <visualization_msgs/MarkerArray.h>
 
 namespace fake_object_recognition {
 
@@ -84,6 +89,7 @@ private:
     ros::Publisher recognized_objects_pub_;
     ros::Publisher recognized_objects_marker_pub_;
     ros::Publisher generated_constellation_marker_pub_;
+    ros::Publisher object_normals_pub_;
 
     /** A timer which is used to control the recognition cycles **/
     ros::Timer timer_;
@@ -117,6 +123,9 @@ private:
     /** The minimum value an elevation angle rating of a pose needs to have to be valid **/
     double rating_threshold_y_;
 
+    /** The minimum value between 0.0 and 1.0 a normals rating of an object needs to have to be valid **/
+    double rating_threshold_;
+
     /** The time between recognition cycles used by the timer **/
     double timer_duration_;
 
@@ -131,6 +140,18 @@ private:
 
     /** An error simulator used to generate pose errors **/
     ErrorSimulation err_sim_;
+
+    /** Map of object names to the object's normal vectors **/
+    std::map<std::string, std::vector<geometry_msgs::Point>> normals_;
+
+    /** Map of object names to the object's bounding box corner points **/
+    std::map<std::string, std::array<geometry_msgs::Point, 8>> bounding_box_corners_;
+
+    /** Service client used to request object meta data */
+    ros::ServiceClient object_metadata_service_client_;
+
+    /** Name of the file where calculated bounding box corner points are stored */
+    std::string bb_corners_file_name_;
 
 
 
@@ -209,6 +230,20 @@ private:
      * \return              True if the object is visible, false otherwise
      */
     bool objectIsVisible(const geometry_msgs::Pose &pose_left, const geometry_msgs::Pose &pose_right);
+    
+    /**
+     * \brief Checks whether an object is currently visible
+     *
+     * \param bb_left       Bounding box corner points in left camera frame
+     * \param bb_right      Bounding box corner points in right camera frame
+     * \param pose_left     Object pose in left camera frame
+     * \param pose_right    Object pose in right camera frame
+     * \param normals_left  Object sight normals in left camer frame
+     * \param normals_right Object sight normals in left camer frame
+     * \return              True if the object is visible, false otherwise
+     */
+    bool objectIsVisible(const std::array<geometry_msgs::Point, 8> &bb_left, const std::array<geometry_msgs::Point, 8> &bb_right, const geometry_msgs::Pose &pose_left, const geometry_msgs::Pose &pose_right,
+                         const std::vector<geometry_msgs::Point> &normals_left, const std::vector<geometry_msgs::Point> &normals_right);
 
     /**
      * \brief Transforms a given pose from one frame to another
@@ -259,6 +294,64 @@ private:
      * \return          The created color-message
      */
     static std_msgs::ColorRGBA createColorRGBA(float red, float green, float blue, float alpha);
+
+    /**
+     * \brief Transforms points locally (as opposed to via a ROS service call in transformFrame)
+     * \param points_list   List of Points to transform as a std::vector
+     * \param rot_mat       Rotation quaternion to transform with (gets normalized in fuction)
+     * \param translation   Translation vector
+     * \return list of transformed points
+     */
+    std::vector<geometry_msgs::Point> transformPoints(std::vector<geometry_msgs::Point> points_list, Eigen::Quaterniond rotation, Eigen::Vector3d translation);
+
+    /**
+     * \brief Transforms points locally (as opposed to via a ROS service call in transformFrame)
+     * \param points_list   List of Points to transform as a std::array<geometry_msgs::Point, 8> (specifically for bounding box corners)
+     * \param rot_mat       Rotation quaternion to transform with (gets normalized in fuction)
+     * \param translation   Translation vector
+     * \return list of transformed points
+     */
+    std::array<geometry_msgs::Point, 8> transformPoints(std::array<geometry_msgs::Point, 8> points_list, Eigen::Quaterniond rotation, Eigen::Vector3d translation);
+
+    /**
+     * \brief publishes normal markers (yellow arrows) for all objects in the configuration
+     * \param object    the ObjectConfig for which to show the normals
+     * \param id        The id used to distinguish between multiple markers
+     * \param lifetime  The lifetime of the marker
+     * \return          The created marker
+     */
+    visualization_msgs::MarkerArray::Ptr createNormalMarker(const ObjectConfig &object, int id, int lifetime);
+
+    /**
+     * \brief get Normals of the object through the object_database/object_meta_data service
+     * \param object to get the normals for
+     * \return vector of the object normals
+     */
+    std::vector<geometry_msgs::Point> getNormals(const ObjectConfig &object);
+
+    /**
+      * \brief try to get bounding box corner points from file.
+      * \param result       the resulting list of corner points. Contents undefined if false is returned
+      * \param object_type  Type of the ObjectConfig
+      * \return whether bounding box corner point were found (true) or not
+      */
+     bool getBBfromFile(std::array<geometry_msgs::Point, 8> &result, std::string object_type);
+
+    /**
+     * \brief calculate approximated oriented bounding box of the object represented by its corner points
+     * \param object to calculate the bounding box corner points for
+     * \return the object's bounding box corner points
+     */
+    std::array<geometry_msgs::Point, 8> calculateBB(const ObjectConfig &object);
+
+    /**
+     * @brief creates a Point geometry_msg with the given coordinates
+     * @param x coordinate
+     * @param y coordinate
+     * @param z coordinate
+     * @return geometry_msgs::Point with the given coordinates
+     */
+    geometry_msgs::Point createPoint(double x, double y, double z);
 
 public:
     /**

@@ -8,9 +8,9 @@ include(CheckCXXCompilerFlag)
 CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
 CHECK_CXX_COMPILER_FLAG("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
 if(COMPILER_SUPPORTS_CXX11)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fext-numeric-literals") #-fext-numeric-literals to avoid boost bug
 elseif(COMPILER_SUPPORTS_CXX0X)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -fext-numeric-literals")
 else()
         message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif()
@@ -24,11 +24,13 @@ find_package(catkin REQUIRED COMPONENTS
   tf
   asr_msgs
   cmake_modules
-  asr_rapidxml
+  rapidxml
+  object_database
 )
 
 find_package(Eigen REQUIRED)
-include_directories(${Eigen_INCLUDE_DIRS})
+find_package(PCL REQUIRED)
+find_package(approx_mvbb REQUIRED)
 
 generate_dynamic_reconfigure_options(cfg/FakeObjectRecognition.cfg)
 include_directories(${dynamic_reconfigure_PACKAGE_PATH}/cmake/cfgbuild.cmake)
@@ -46,14 +48,17 @@ generate_messages(
 
 catkin_package(
     INCLUDE_DIRS include
-    CATKIN_DEPENDS dynamic_reconfigure std_msgs roscpp roslib asr_msgs asr_rapidxml
+    CATKIN_DEPENDS dynamic_reconfigure std_msgs roscpp roslib asr_msgs rapidxml
     DEPENDS Eigen
 )
 
 
 include_directories(
     include
-    ${catkin_INCLUDE_DIRS}
+      ${Eigen_INCLUDE_DIRS}
+      ${PCL_INCLUDE_DIRS}
+      ${catkin_INCLUDE_DIRS}
+      ${approx_mvbb_INCLUDE_DIRS}
 )
 
 link_directories(${catkin_LIBRARY_DIRS})
@@ -67,6 +72,8 @@ add_executable(asr_fake_object_recognition src/fake_object_recognition.cpp
 
 TARGET_LINK_LIBRARIES(asr_fake_object_recognition
       ${catkin_LIBRARIES}
+      ${PCL_LIBRARIES}
+      ${approx_mvbb_LIBRARIES}
 )
 
 add_dependencies(asr_fake_object_recognition
@@ -74,6 +81,8 @@ add_dependencies(asr_fake_object_recognition
         asr_fake_object_recognition_gencpp
         ${${PROJECT_NAME}_EXPORTED_TARGETS}
         asr_msgs_generate_messages_cpp
+        object_database
+        approx_mvbb
 )
 
 add_executable(config_marker_rotator src/config_marker_rotator.cpp)

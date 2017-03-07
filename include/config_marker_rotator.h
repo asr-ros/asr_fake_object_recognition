@@ -18,7 +18,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 #ifndef CONFIGMARKERROTATOR_H
 #define CONFIGMARKERROTATOR_H
 
-#include <iostream>
 #include <string>
 #include <vector>
 #include <stdio.h>

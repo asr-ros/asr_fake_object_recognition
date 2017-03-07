@@ -1,9 +1,9 @@
 <Objects>
-<Object type="CoffeeBox" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/CoffeeBox/CoffeeBox.dae" angles="quaternion">2.02509,-0.78442,0.811741,0.702722073225,-0.711237100243,0.0115559268341,-0.0137817123479</Object>
-<Object type="Cup" id="011021054100" mesh="package://asr_object_database/rsc/databases/segmentable_objects/Cup/object.dae" angles="quaternion">2.17025,-0.91741,0.791296,0.493362266741,-0.506159281362,-0.482918015288,0.516901002279</Object>
-<Object type="PlateDeep" id="016054023100" mesh="package://asr_object_database/rsc/databases/segmentable_objects/PlateDeep/object.dae" angles="quaternion">2.0088,-1.04163,0.776058,0.511861143918,-0.487977949581,-0.490320478159,0.50937365339</Object>
-<Object type="Smacks" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/Smacks/Smacks.dae" angles="quaternion">2.35889,-0.88123,0.89371,0.651753878248,-0.659713244777,0.273684155696,-0.255131926218</Object>
-<Object type="VitalisSchoko" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/VitalisSchoko/VitalisSchoko.dae" angles="quaternion">1.754804,-0.78686,0.862144,0.651006118793,-0.668344901224,-0.260449553884,0.248338793151</Object>
-<Object type="marker_4" id="0" mesh="package://asr_object_database/rsc/databases/marker/marker_4/marker_4.dae" angles="quaternion">1.804374,-1.07199,0.782751,0.251187692509,-0.277100086597,-0.638678698525,0.672465467657</Object>
-<Object type="marker_5" id="0" mesh="package://asr_object_database/rsc/databases/marker/marker_5/marker_5.dae" angles="quaternion">2.23923,-1.16194,0.784509,0.257000707744,-0.248931045015,-0.633263681711,0.686266042051</Object>
+<Object type="CoffeeBox" id="0" mesh="package://object_database/rsc/databases/textured_objects/CoffeeBox/CoffeeBox.dae" angles="quaternion">2.02509,-0.78442,0.811741,0.702722073225,-0.711237100243,0.0115559268341,-0.0137817123479</Object>
+<Object type="Cup" id="011021054100" mesh="package://object_database/rsc/databases/segmentable_objects/Cup/object.dae" angles="quaternion">2.17025,-0.91741,0.791296,0.493362266741,-0.506159281362,-0.482918015288,0.516901002279</Object>
+<Object type="PlateDeep" id="016054023100" mesh="package://object_database/rsc/databases/segmentable_objects/PlateDeep/object.dae" angles="quaternion">2.0088,-1.04163,0.776058,0.511861143918,-0.487977949581,-0.490320478159,0.50937365339</Object>
+<Object type="Smacks" id="0" mesh="package://object_database/rsc/databases/textured_objects/Smacks/Smacks.dae" angles="quaternion">2.35889,-0.88123,0.89371,0.651753878248,-0.659713244777,0.273684155696,-0.255131926218</Object>
+<Object type="VitalisSchoko" id="0" mesh="package://object_database/rsc/databases/textured_objects/VitalisSchoko/VitalisSchoko.dae" angles="quaternion">1.754804,-0.78686,0.862144,0.651006118793,-0.668344901224,-0.260449553884,0.248338793151</Object>
+<Object type="marker_4" id="0" mesh="package://object_database/rsc/databases/marker/marker_4/marker_4.dae" angles="quaternion">1.804374,-1.07199,0.782751,0.251187692509,-0.277100086597,-0.638678698525,0.672465467657</Object>
+<Object type="marker_5" id="0" mesh="package://object_database/rsc/databases/marker/marker_5/marker_5.dae" angles="quaternion">2.23923,-1.16194,0.784509,0.257000707744,-0.248931045015,-0.633263681711,0.686266042051</Object>
 </Objects>

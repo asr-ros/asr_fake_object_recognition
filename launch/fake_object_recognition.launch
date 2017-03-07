@@ -1,16 +1,24 @@
 <launch>
 	<env name="ROSCONSOLE_CONFIG_FILE" value="$(find asr_fake_object_recognition)/log/rosconsole.config"/>
   	<node name="asr_fake_object_recognition" pkg="asr_fake_object_recognition" type="asr_fake_object_recognition" output="screen">
-	  <rosparam file="$(find asr_next_best_view)/rsc/next_best_view_settings_sim.yaml" />
+	  <rosparam file="$(find next_best_view)/rsc/next_best_view_settings_sim.yaml" />
 	  <rosparam file="$(find asr_fake_object_recognition)/config/params.yaml" />
   	
-	    <param name="frustum_mode" value="0"/>
+	    <!--Frustum mode: Which cameras are considered: default (0) - both (AND), 1 - either (OR), 2 - left only, 3 -right only:-->
+	    <param name="frustum_mode" value="1"/>
+	    <!-- Use camera pose. If false, objects are searched and found in the world frame:-->
 	    <param name="use_camera_pose" value="True"/>
+	    <!--Pose invalidation: Simulates error (invalid pose):-->
 	    <param name="use_pose_invalidation" value="False"/>
+	    <!--Probability that a pose is invalidated:-->
 	    <param name="prob_pose_invalidation" value="0.01"/>
+	    <!--Add noise to position to simulate real noise:-->
 	    <param name="use_position_noise" value="False"/>
+	    <!--Mean of the normal distribution for the noise:-->
 	    <param name="pos_noise_normal_dist_mean" value="0.0"/>
+	    <!--Deviation:-->
 	    <param name="pos_noise_normal_dist_dev" value="0.001"/>
+	    <!--Add noise to orientation:-->
 	    <param name="use_orientation_noise" value="False"/>
 	    <param name="or_x_noise_normal_dist_mean" value="0.0"/>
 	    <param name="or_x_noise_normal_dist_dev" value="0.01"/>
@@ -20,6 +28,6 @@
 	    <param name="or_z_noise_normal_dist_dev" value="0.01"/>
   	
   	</node>
-	<node name="asr_object_database" type="asr_object_database" pkg="asr_object_database" output="screen" />
+	<node name="object_database" type="object_database" pkg="object_database" output="screen" />
 
 </launch>

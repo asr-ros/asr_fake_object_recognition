@@ -1,5 +1,1 @@
-<Objects>
-  <Object type="CeylonTea" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/CeylonTea/CeylonTea.dae">-1.90279,0.249461,1.64604,-0.440004,0.46487,0.556995,-0.529197 </Object>
-  <Object type="Smacks" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/Smacks/Smacks.dae">-0.339374,0.668717,0.761369,0.713027,-0.700466,-0.00626035,0.0300117 </Object>
-  <Object type="VitalisSchoko" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/VitalisSchoko/VitalisSchoko.dae">-0.144556,0.668235,0.733657,0.695246,-0.718758,0.00198091,0.00393594 </Object>
-  </Objects>
+<Objects><Object type="CeylonTea" id="0" mesh="package://object_database/rsc/databases/textured_objects/CeylonTea/CeylonTea.dae">-1.90279,0.249461,1.64604,-0.440004,0.46487,0.556995,-0.529197 </Object><Object type="Smacks" id="0" mesh="package://object_database/rsc/databases/textured_objects/Smacks/Smacks.dae">-0.339374,0.668717,0.761369,0.713027,-0.700466,-0.00626035,0.0300117 </Object><Object type="VitalisSchoko" id="0" mesh="package://object_database/rsc/databases/textured_objects/VitalisSchoko/VitalisSchoko.dae">-0.144556,0.668235,0.733657,0.695246,-0.718758,0.00198091,0.00393594 </Object></Objects>

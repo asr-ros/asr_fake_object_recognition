@@ -19,8 +19,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 #define OBJECT_CONFIG_H
 
 #include <ros/ros.h>
+#include <geometry_msgs/Point.h>
 #include <geometry_msgs/Pose.h>
 #include <object_config.h>
+
 
 namespace fake_object_recognition {
 
@@ -42,6 +44,11 @@ private:
     /** The path to the mesh used to visualize the object **/
     std::string mesh_name_;
 
+    /** The normals of the object **/
+    std::vector<geometry_msgs::Point> normals_;
+
+    /** The bounding box corner points of the object **/
+    std::vector<geometry_msgs::Point> bb_corners_;
 
 
 public:
@@ -82,7 +89,7 @@ public:
      * @return The object's mesh path
      */
     std::string getMeshName() const;
-
+    
 };
 
 }

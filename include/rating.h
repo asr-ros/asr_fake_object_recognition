@@ -19,6 +19,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 #define RATING_H
 
 #include <geometry_msgs/Pose.h>
+#include <geometry_msgs/Point.h>
 #include <Eigen/Dense>
 
 namespace fake_object_recognition {
@@ -44,21 +45,39 @@ class Rating {
     const Eigen::Vector3d camera_orientation_;
 
     /**
-     * \brief Returns a rating of an object's pose based on the distance to the camera
-     *
-     * \param object_pose       The pose of the object
-     * \return                  The calculated rating
-     */
+    * \brief Returns a rating of an object's pose based on the distance to the camera
+    *
+    * \param object_pose       The pose of the object
+    * \return                  The calculated rating
+    */
     double getDistanceRating(const geometry_msgs::Pose &object_pose);
 
     /**
-     * \brief Returns a rating of an object's pose based on the (azimut or elevation) angle between the camera's visual axis and the vector from the camera to the object's position.
-     *
-     * \param object_pose       The pose of the object
-     * \param direction         True == azimut, false == elevation.
-     * \return                  The calculated rating
-     */
+    * \brief Returns a rating of an object's pose based on the (azimut or elevation) angle between the camera's visual axis and the vector from the camera to the object's position.
+    *
+    * \param object_pose       The pose of the object
+    * \param direction         True == azimut, false == elevation.
+    * \return                  The calculated rating
+    */
     double getAngleRating(const geometry_msgs::Pose &object_pose, bool direction);
+    
+    /**
+     * \brief Returns the amount of points of the bounding box inside the frustum divided by the amount of all points.
+     *
+     * \param bounding_box  Bounding Box, assumed (but momentarily not required) to be represented by its 8 corner points in the camera frame.
+     * \return              whether all points are within the frustum
+     */
+    bool getBBRating(const std::array<geometry_msgs::Point, 8> &bounding_box);
+    
+    /**
+     * \brief Returns a rating for the angle between sight vector to object and object's normal. 1.0 is best, 0.0 worst.
+     *
+     * Looks for the normal that will produce the best rating and returns that rating.
+     * \param object_pose   Pose of the object relative to camera.
+     * \param normals       List of normals of the object.
+     * \return
+     */
+    double getNormalRating(const geometry_msgs::Pose &object_pose, const std::vector<geometry_msgs::Point> &normals);
 
 public:
     /**
@@ -72,15 +91,28 @@ public:
     Rating(double fovx, double fovy, double ncp, double fcp);
 
     /**
-     * \brief Return whether a pose is visible in the camera frustum based on the distance and angle rating
-     *
-     * \param pose          The given object's pose
-     * \param threshold_d   The minimum distance rating value this pose needs to have to be visible.
-     * \param threshold_x   The minimum angle rating value in azimut this pose needs to have to be visible.
-     * \param threshold_y   The minimum angle rating value in elevation this pose needs to have to be visible.
-     * \return              True if the object is visible based on the rating, false otherwise
-     */
+    * \brief Return whether a pose is visible in the camera frustum based on the distance and angle rating
+    *
+    * \param pose          The given object's pose
+    * \param threshold_d   The minimum distance rating value this pose needs to have to be visible.
+    * \param threshold_x   The minimum angle rating value in azimut this pose needs to have to be visible.
+    * \param threshold_y   The minimum angle rating value in elevation this pose needs to have to be visible.
+    * \return              True if the object is visible based on the rating, false otherwise
+    */
     bool ratePose(const geometry_msgs::Pose &pose, double threshold_d, double threshold_x, double threshold_y);
+    
+    /**
+     * @brief Rates an objects visibility based on its bounding box and its normals.
+     *
+     * If not all of the object's bounding box corner points are inside the frustum, returns false.
+     *
+     * @param object_pose   Pose of the object in the camera frame.
+     * @param bounding_box  Bounding box corner points.
+     * @param normals       Normals. If vector ist empty, normals are not considered in rating.
+     * @param threshold     The threshold above which a normal rating is accepted.
+     * @return              True if the object is visible based on its rating, false otherwise.
+     */
+    bool rateBBandNormal(const geometry_msgs::Pose &object_pose, const std::array<geometry_msgs::Point, 8> &bounding_box, const std::vector<geometry_msgs::Point> &normals, double threshold);
 };
 
 }

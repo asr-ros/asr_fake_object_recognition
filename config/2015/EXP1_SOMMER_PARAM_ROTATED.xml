@@ -1,6 +1,6 @@
 <Objects>
-<Object type="Knaeckebrot" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/Knaeckebrot/Knaeckebrot.dae" angles="quaternion">0.265720905007,-1.24026706962,0.705691,0.546249766982,-0.553752163989,0.441055068522,-0.447705438298</Object>
-<Object type="Smacks" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/Smacks/Smacks.dae" angles="quaternion">0.554842002045,-0.735784699229,0.786433,-0.210493698225,0.238509788693,0.664116930589,-0.676575336685</Object>
-<Object type="VitalisSchoko" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/VitalisSchoko/VitalisSchoko.dae" angles="quaternion">0.30421407014,-1.09730638737,0.74663,0.510613023643,-0.535714154825,0.478311912533,-0.472760403096</Object>
-<Object type="CoffeeBox" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/CoffeeBox/CoffeeBox.dae" angles="quaternion">0.470225835345,-0.961823199363,0.687763,0.235867086141,-0.233374846506,0.670751575651,-0.663321356851</Object>
+<Object type="Knaeckebrot" id="0" mesh="package://object_database/rsc/databases/textured_objects/Knaeckebrot/Knaeckebrot.dae" angles="quaternion">0.265720905007,-1.24026706962,0.705691,0.546249766982,-0.553752163989,0.441055068522,-0.447705438298</Object>
+<Object type="Smacks" id="0" mesh="package://object_database/rsc/databases/textured_objects/Smacks/Smacks.dae" angles="quaternion">0.554842002045,-0.735784699229,0.786433,-0.210493698225,0.238509788693,0.664116930589,-0.676575336685</Object>
+<Object type="VitalisSchoko" id="0" mesh="package://object_database/rsc/databases/textured_objects/VitalisSchoko/VitalisSchoko.dae" angles="quaternion">0.30421407014,-1.09730638737,0.74663,0.510613023643,-0.535714154825,0.478311912533,-0.472760403096</Object>
+<Object type="CoffeeBox" id="0" mesh="package://object_database/rsc/databases/textured_objects/CoffeeBox/CoffeeBox.dae" angles="quaternion">0.470225835345,-0.961823199363,0.687763,0.235867086141,-0.233374846506,0.670751575651,-0.663321356851</Object>
 </Objects>

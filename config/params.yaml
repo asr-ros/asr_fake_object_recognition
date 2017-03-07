@@ -1,15 +1,15 @@
 frame_world: /map                                               #The name of the world frame
 frame_camera_left: /camera_left_frame                           #The name of the left camera frame
 frame_camera_right: /camera_right_frame                         #The name of the right camera frame
-config_file_path: ./config/objects.xml                          #The path to the file containing the available objects in this package
+config_file_path: ./config/fake_configurator.xml                #The path to the file containing the available objects in this package
 output_rec_objects_topic: /stereo/objects                       #The name of the topic found objects are published on
 output_rec_marker_topic: /stereo/visualization_marker           #The name of the topic the markers of found objects are published on
 output_constellation_topic: constellation_visualization         #The name of the topic the markers of the available objects are published on
 
-#These values have been optimized for a frustum (ncp,fcp,fovx,fovy) with (0.4,1.5,30,20) with fake_configurator.yaml 
-rating_threshold_d: 0.02                                          #Objects are found if their distance rating is higher than this value
-rating_threshold_x: 0.45                                          #Objects are found if their angle rating in azimut is higher than this value
-rating_threshold_y: 0.45                                          #Objects are found if their angle rating in elevation is higher than this value
+#threshold for variant rating distance and angle:
+#rating_threshold: 0.1                                           #Objects are found if their rating is higher than this value
+#threshold for rating normals if bounding box in frustum:
+rating_threshold: 0.2                                           #Objects are found if their rating is higher than this value
 
 #DO NOT TOUCH THIS PARAM BEFORE ASKING PASCAL
 timer_duration: 0.25                                             #The time between the recognition cycles (in seconds)
