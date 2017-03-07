@@ -25,12 +25,12 @@ find_package(catkin REQUIRED COMPONENTS
   asr_msgs
   cmake_modules
   asr_rapidxml
-  object_database
+  asr_object_database
 )
 
 find_package(Eigen REQUIRED)
 find_package(PCL REQUIRED)
-find_package(approx_mvbb REQUIRED)
+find_package(asr_approx_mvbb REQUIRED)
 
 generate_dynamic_reconfigure_options(cfg/FakeObjectRecognition.cfg)
 include_directories(${dynamic_reconfigure_PACKAGE_PATH}/cmake/cfgbuild.cmake)
@@ -58,7 +58,7 @@ include_directories(
       ${Eigen_INCLUDE_DIRS}
       ${PCL_INCLUDE_DIRS}
       ${catkin_INCLUDE_DIRS}
-      ${approx_mvbb_INCLUDE_DIRS}
+      ${asr_approx_mvbb_INCLUDE_DIRS}
 )
 
 link_directories(${catkin_LIBRARY_DIRS})
@@ -73,7 +73,7 @@ add_executable(asr_fake_object_recognition src/fake_object_recognition.cpp
 TARGET_LINK_LIBRARIES(asr_fake_object_recognition
       ${catkin_LIBRARIES}
       ${PCL_LIBRARIES}
-      ${approx_mvbb_LIBRARIES}
+      ${asr_approx_mvbb_LIBRARIES}
 )
 
 add_dependencies(asr_fake_object_recognition
@@ -81,8 +81,8 @@ add_dependencies(asr_fake_object_recognition
         asr_fake_object_recognition_gencpp
         ${${PROJECT_NAME}_EXPORTED_TARGETS}
         asr_msgs_generate_messages_cpp
-        object_database
-        approx_mvbb
+        asr_object_database
+        asr_approx_mvbb
 )
 
 add_executable(config_marker_rotator src/config_marker_rotator.cpp)
