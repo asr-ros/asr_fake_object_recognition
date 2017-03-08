@@ -77,6 +77,8 @@ FakeObjectRecognition::FakeObjectRecognition() : nh_(NODE_NAME), config_changed_
     object_metadata_service_client_ = nh_.serviceClient<asr_object_database::ObjectMetaData>("/asr_object_database/object_meta_data");
     // Set bounding box corner point filename:
     bb_corners_file_name_ = ros::package::getPath("asr_fake_object_recognition") + "/config/bounding_box_corners.xml";
+    // Set object databse package name:
+    object_database_name_ = "asr_object_database";
 
     for (std::vector<ObjectConfig>::iterator iter = objects_.begin(); iter != objects_.end(); ++iter) {
        if (normals_.find(iter->getType()) == normals_.end()) {    // if normals of object type not yet initialized
@@ -653,14 +655,14 @@ std::vector<geometry_msgs::Point> FakeObjectRecognition::getNormals(const Object
     // init normals: (similar to next_best_view ObjectHelper.h)
     std::vector<geometry_msgs::Point> temp_normals = std::vector<geometry_msgs::Point>();
 
-    // Takes the mesh file path and cuts off the beginning ("package://asr_object_database/rsc/database/")
+    // Takes the mesh file path and cuts off the beginning ("package://asr_object_database/rsc/databases/")
     // and everything after the next "_", leaving only the recognizer name of the object.
     std::vector<std::string> strvec;
     std::string in = object.getMeshName();
     boost::algorithm::trim_if(in, boost::algorithm::is_any_of("_/"));
     boost::algorithm::split(strvec, in, boost::algorithm::is_any_of("_/"));
-    ROS_DEBUG_STREAM("Recognizer name of object: " << strvec.at(6));
-    std::string recognizer = strvec.at(6);
+    ROS_DEBUG_STREAM("Recognizer name of object: " << strvec.at(7));
+    std::string recognizer = strvec.at(7);
 
     // Get the object's meta data containing the normals:
     asr_object_database::ObjectMetaData objectMetaData;
@@ -681,34 +683,39 @@ bool FakeObjectRecognition::getBBfromFile(std::array<geometry_msgs::Point, 8> &r
      // open config/bounding_box_corners.xml and check whether the corners for the respective object have already been calculated and stored there:
      ROS_DEBUG_STREAM("Looking for bounding box corner points in " << bb_corners_file_name_);
      std::string corners_string;
-     try {
-         rapidxml::file<> xmlFile(bb_corners_file_name_.c_str());
-         rapidxml::xml_document<> doc;
-         doc.parse<0>(xmlFile.data());
-         rapidxml::xml_node<> *root_node = doc.first_node();
-         if (root_node) {
-             rapidxml::xml_node<> *child_node = root_node->first_node();
-             while (child_node) {
-                rapidxml::xml_attribute<> *type_attribute = child_node->first_attribute("type");
-                if (type_attribute) {
-                    if (object_type == type_attribute->value()) {
-                        rapidxml::xml_node<> *bb_corners_node = child_node->first_node();
-                        if (bb_corners_node) {
-                            corners_string = bb_corners_node->value();
-                        }
-                        else {
-                            ROS_DEBUG_STREAM("Could not find values in node with attribute type = \"" << object_type << "\"");
-                        }
-                        break;
-                    }
-                }
-                child_node = child_node->next_sibling();
-            }
+     if (std::ifstream(bb_corners_file_name_)) {
+         try {
+             rapidxml::file<> xmlFile(bb_corners_file_name_.c_str());
+             rapidxml::xml_document<> doc;
+             doc.parse<0>(xmlFile.data());
+             rapidxml::xml_node<> *root_node = doc.first_node();
+             if (root_node) {
+                 rapidxml::xml_node<> *child_node = root_node->first_node();
+                 while (child_node) {
+                     rapidxml::xml_attribute<> *type_attribute = child_node->first_attribute("type");
+                     if (type_attribute) {
+                         if (object_type == type_attribute->value()) {
+                             rapidxml::xml_node<> *bb_corners_node = child_node->first_node();
+                             if (bb_corners_node) {
+                                 corners_string = bb_corners_node->value();
+                             }
+                             else {
+                                 ROS_DEBUG_STREAM("Could not find values in node with attribute type = \"" << object_type << "\"");
+                             }
+                             break;
+                         }
+                     }
+                     child_node = child_node->next_sibling();
+                 }
+             }
+         } catch(std::runtime_error err) {
+             ROS_DEBUG_STREAM("Can't parse xml-file. Runtime error: " << err.what());
+         } catch (rapidxml::parse_error err) {
+             ROS_DEBUG_STREAM("Can't parse xml-file Parse error: " << err.what());
          }
-     } catch(std::runtime_error err) {
-         ROS_DEBUG_STREAM("Can't parse xml-file. Runtime error: " << err.what());
-     } catch (rapidxml::parse_error err) {
-         ROS_DEBUG_STREAM("Can't parse xml-file Parse error: " << err.what());
+     }
+     else {
+         ROS_DEBUG_STREAM("File " << bb_corners_file_name_ << " does not exist. Will be created when calculating new bounding box corners.");
      }
      std::array<geometry_msgs::Point, 8> corner_points;
      if (corners_string.length() > 0) { // Bounding box corners were found
@@ -756,7 +763,9 @@ std::array<geometry_msgs::Point, 8> FakeObjectRecognition::calculateBB(const Obj
     * If no bounding box could be found, a vector containing only the object's center 8 times is used.
     * Result is written to file bb_corners_file_name_.*/
     // Get mesh input file:
-    std::string mesh_path = ros::package::getPath("asr_object_database") + object.getMeshName().substr(25); // cuts off "package://asr_object_database" from object's meshName
+    std::string to_cut = "package://" + object_database_name_;
+    unsigned int length_to_cut = to_cut.length();
+    std::string mesh_path = ros::package::getPath(object_database_name_) + object.getMeshName().substr(length_to_cut); // cuts off "package://asr_object_database" from object's meshName
     ROS_DEBUG_STREAM("Looking for mesh in: " << mesh_path);
 
     // Parse the input file:
@@ -896,6 +905,19 @@ std::array<geometry_msgs::Point, 8> FakeObjectRecognition::calculateBB(const Obj
         }
         std::string object_node = "<Object type=\"" + object.getType() + "\">" + corners_string + "</Object>";
         std::ifstream ifile;
+        std::ofstream ofile;
+        // if necessary, create file:
+        if (!(std::ifstream(bb_corners_file_name_))) { // file does not exists
+            ROS_DEBUG_STREAM("Could not find file " << bb_corners_file_name_ << ". Creating file.");
+            ofile.open(bb_corners_file_name_);
+            if (ofile.is_open()) {
+                ofile << "<Objects></Objects>";
+                ofile.close();
+            }
+            else
+                ROS_DEBUG_STREAM("Could not open file " << bb_corners_file_name_);
+        }
+
         ifile.open(bb_corners_file_name_);
         if (ifile.is_open()) {
             std::string old_contents;
@@ -905,7 +927,6 @@ std::array<geometry_msgs::Point, 8> FakeObjectRecognition::calculateBB(const Obj
             }
             ifile.close();
             if (old_contents.find("<Objects>") == 0) {
-                std::ofstream ofile;
                 ofile.open(bb_corners_file_name_);
                 if (ofile.is_open()) {
                     std::string inner_nodes = old_contents.substr(9); // Cut off "<Objects>" in the beginning.

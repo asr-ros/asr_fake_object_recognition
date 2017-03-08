@@ -153,6 +153,9 @@ private:
     /** Name of the file where calculated bounding box corner points are stored */
     std::string bb_corners_file_name_;
 
+    /** Name of the database package where object mesh and normal files are stored */
+    std::string object_database_name_;
+
 
 
     /**
