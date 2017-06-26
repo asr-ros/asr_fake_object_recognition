@@ -27,8 +27,8 @@ find_package(catkin REQUIRED COMPONENTS
   asr_rapidxml
 )
 
-find_package(Eigen REQUIRED)
-include_directories(${Eigen_INCLUDE_DIRS})
+find_package(Eigen3 REQUIRED)
+include_directories(${EIGEN3_INCLUDE_DIRS})
 
 generate_dynamic_reconfigure_options(cfg/FakeObjectRecognition.cfg)
 include_directories(${dynamic_reconfigure_PACKAGE_PATH}/cmake/cfgbuild.cmake)
@@ -47,7 +47,7 @@ generate_messages(
 catkin_package(
     INCLUDE_DIRS include
     CATKIN_DEPENDS dynamic_reconfigure std_msgs roscpp roslib asr_msgs asr_rapidxml
-    DEPENDS Eigen
+    DEPENDS EIGEN3
 )
 
 
