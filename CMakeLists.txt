@@ -27,8 +27,17 @@ find_package(catkin REQUIRED COMPONENTS
   asr_rapidxml
 )
 
-find_package(Eigen REQUIRED)
-include_directories(${Eigen_INCLUDE_DIRS})
+#find Eigen (depends on ros distro):
+find_package(Eigen3)
+if(NOT EIGEN3_FOUND)
+  find_package(Eigen REQUIRED)
+  set(EIGEN3_INCLUDE_DIRS ${EIGEN_INCLUDE_DIRS})
+  set(EIGEN3_LIBRARIES ${EIGEN_LIBRARIES}) 
+else()
+  set(EIGEN3_INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+endif()
+
+include_directories(${EIGEN3_INCLUDE_DIRS})
 
 generate_dynamic_reconfigure_options(cfg/FakeObjectRecognition.cfg)
 include_directories(${dynamic_reconfigure_PACKAGE_PATH}/cmake/cfgbuild.cmake)
@@ -47,7 +56,7 @@ generate_messages(
 catkin_package(
     INCLUDE_DIRS include
     CATKIN_DEPENDS dynamic_reconfigure std_msgs roscpp roslib asr_msgs asr_rapidxml
-    DEPENDS Eigen
+    DEPENDS EIGEN3
 )
 
 
