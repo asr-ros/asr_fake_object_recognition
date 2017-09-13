@@ -86,5 +86,3 @@ add_dependencies(asr_fake_object_recognition
         asr_msgs_generate_messages_cpp
 )
 
-add_executable(config_marker_rotator src/config_marker_rotator.cpp)
-target_link_libraries(config_marker_rotator ${catkin_LIBRARIES})
