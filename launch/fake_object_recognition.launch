@@ -2,7 +2,7 @@
 	<env name="ROSCONSOLE_CONFIG_FILE" value="$(find asr_fake_object_recognition)/log/rosconsole.config"/>
   	<node name="asr_fake_object_recognition" pkg="asr_fake_object_recognition" type="asr_fake_object_recognition" output="screen">
 	  <rosparam file="$(find asr_next_best_view)/rsc/next_best_view_settings_sim.yaml" />
-	  <rosparam file="$(find asr_fake_object_recognition)/config/params.yaml" />
+	  <rosparam file="$(find asr_fake_object_recognition)/param/params.yaml" />
   	
 	    <param name="frustum_mode" value="0"/>
 	    <param name="use_camera_pose" value="True"/>
