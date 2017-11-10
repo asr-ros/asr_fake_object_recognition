@@ -26,6 +26,7 @@ find_package(catkin REQUIRED COMPONENTS
   cmake_modules
   asr_rapidxml
   asr_object_database
+  asr_approx_mvbb
 )
 
 
@@ -67,7 +68,6 @@ include_directories(
       ${Eigen_INCLUDE_DIRS}
       ${PCL_INCLUDE_DIRS}
       ${catkin_INCLUDE_DIRS}
-      ${asr_approx_mvbb_INCLUDE_DIRS}
 )
 
 link_directories(${catkin_LIBRARY_DIRS})
@@ -82,7 +82,6 @@ add_executable(asr_fake_object_recognition src/fake_object_recognition.cpp
 TARGET_LINK_LIBRARIES(asr_fake_object_recognition
       ${catkin_LIBRARIES}
       ${PCL_LIBRARIES}
-      ${asr_approx_mvbb_LIBRARIES}
 )
 
 add_dependencies(asr_fake_object_recognition
