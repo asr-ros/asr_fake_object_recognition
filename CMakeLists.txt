@@ -29,6 +29,8 @@ find_package(catkin REQUIRED COMPONENTS
   asr_approx_mvbb
 )
 
+#find PCL
+find_package(PCL REQUIRED)
 
 #find Eigen (depends on ros distro):
 find_package(Eigen3)
