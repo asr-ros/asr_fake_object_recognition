@@ -19,8 +19,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 #include <Eigen/Dense>
 #include <ros/console.h>
 
-#include <pcl-1.7/pcl/point_cloud.h>
-#include <pcl-1.7/pcl/filters/frustum_culling.h>
+#include <pcl/point_cloud.h>
+#include <pcl/filters/frustum_culling.h>
 #include <pcl/impl/point_types.hpp>
 
 #include <pcl/filters/impl/frustum_culling.hpp>

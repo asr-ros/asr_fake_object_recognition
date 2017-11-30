@@ -5,6 +5,7 @@ config_file_path: ./config/fake_configurator.xml                #The path to the
 output_rec_objects_topic: /stereo/objects                       #The name of the topic found objects are published on
 output_rec_marker_topic: /stereo/visualization_marker           #The name of the topic the markers of found objects are published on
 output_constellation_topic: constellation_visualization         #The name of the topic the markers of the available objects are published on
+output_normals_topic: /nbv/object_normals                       #The name of the topic the objects' normal markers are published on
 
 #threshold for variant rating distance and angle:
 #rating_threshold: 0.1                                           #Objects are found if their rating is higher than this value

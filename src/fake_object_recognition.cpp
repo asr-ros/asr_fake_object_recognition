@@ -47,6 +47,7 @@ FakeObjectRecognition::FakeObjectRecognition() : nh_(NODE_NAME), config_changed_
     nh_.getParam("output_rec_objects_topic", output_rec_objects_topic_);
     nh_.getParam("output_rec_marker_topic", output_rec_markers_topic_);
     nh_.getParam("output_constellation_topic", output_constellation_marker_topic_);
+    nh_.getParam("output_normals_topic", output_normals_topic_);
     nh_.getParam("rating_threshold_d", rating_threshold_d_);
     nh_.getParam("rating_threshold_x", rating_threshold_x_);
     nh_.getParam("rating_threshold_y", rating_threshold_y_);
@@ -63,7 +64,7 @@ FakeObjectRecognition::FakeObjectRecognition() : nh_(NODE_NAME), config_changed_
     recognized_objects_pub_ = nh_.advertise<asr_msgs::AsrObject>(output_rec_objects_topic_, 1);
     recognized_objects_marker_pub_ = nh_.advertise<visualization_msgs::Marker>(output_rec_markers_topic_, 1);
     generated_constellation_marker_pub_ = nh_.advertise<visualization_msgs::Marker>(output_constellation_marker_topic_, 1);
-    object_normals_pub_ = nh_.advertise<visualization_msgs::MarkerArray>("/nbv/object_normals", 100);
+    object_normals_pub_ = nh_.advertise<visualization_msgs::MarkerArray>(output_normals_topic_, 100);
 
     timer_ = nh_.createTimer(ros::Duration(timer_duration_), &FakeObjectRecognition::timerCallback, this);
 

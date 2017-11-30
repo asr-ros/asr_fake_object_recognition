@@ -115,6 +115,7 @@ private:
     std::string output_rec_objects_topic_;
     std::string output_rec_markers_topic_;
     std::string output_constellation_marker_topic_;
+    std::string output_normals_topic_;
 
     /** The minimum value a distance rating of a pose needs to have to be valid **/
     double rating_threshold_d_;
