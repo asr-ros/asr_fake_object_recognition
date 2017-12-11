@@ -8,9 +8,9 @@ include(CheckCXXCompilerFlag)
 CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
 CHECK_CXX_COMPILER_FLAG("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
 if(COMPILER_SUPPORTS_CXX11)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fext-numeric-literals") #-fext-numeric-literals to avoid boost bug
 elseif(COMPILER_SUPPORTS_CXX0X)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -fext-numeric-literals")
 else()
         message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif()
@@ -25,8 +25,12 @@ find_package(catkin REQUIRED COMPONENTS
   asr_msgs
   cmake_modules
   asr_rapidxml
+  asr_object_database
+  asr_approx_mvbb
 )
 
+#find PCL
+find_package(PCL REQUIRED)
 
 #find Eigen (depends on ros distro):
 find_package(Eigen3)
@@ -63,7 +67,9 @@ catkin_package(
 
 include_directories(
     include
-    ${catkin_INCLUDE_DIRS}
+      ${Eigen_INCLUDE_DIRS}
+      ${PCL_INCLUDE_DIRS}
+      ${catkin_INCLUDE_DIRS}
 )
 
 link_directories(${catkin_LIBRARY_DIRS})
@@ -77,6 +83,7 @@ add_executable(asr_fake_object_recognition src/fake_object_recognition.cpp
 
 TARGET_LINK_LIBRARIES(asr_fake_object_recognition
       ${catkin_LIBRARIES}
+      ${PCL_LIBRARIES}
 )
 
 add_dependencies(asr_fake_object_recognition
@@ -84,5 +91,7 @@ add_dependencies(asr_fake_object_recognition
         asr_fake_object_recognition_gencpp
         ${${PROJECT_NAME}_EXPORTED_TARGETS}
         asr_msgs_generate_messages_cpp
+        asr_object_database
+        asr_approx_mvbb
 )
 

@@ -19,7 +19,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 namespace fake_object_recognition {
 
-ObjectConfig::ObjectConfig(const std::string &type, const std::string id, const geometry_msgs::Pose &pose, const std::string &mesh_name) : type_(type), id_(id), pose_(pose), mesh_name_(mesh_name) { }
+ObjectConfig::ObjectConfig(const std::string &type, const std::string id, const geometry_msgs::Pose &pose, const std::string &mesh_name) : type_(type), id_(id), pose_(pose), mesh_name_(mesh_name),
+    normals_(std::vector<geometry_msgs::Point>()), bb_corners_(std::vector<geometry_msgs::Point>()) { }
 
 std::string ObjectConfig::getType() const {
     return type_;
