@@ -26,7 +26,6 @@ find_package(catkin REQUIRED COMPONENTS
   cmake_modules
   asr_rapidxml
   asr_object_database
-  asr_approx_mvbb
 )
 
 #find PCL
@@ -43,6 +42,10 @@ else()
 endif()
 
 include_directories(${EIGEN3_INCLUDE_DIRS})
+
+# only set this variable if ApproxMVBB is not installed system-wide
+# set(ApproxMVBB_DIR "path/to/ApproxMVBB/Build/Directory/install/lib/cmake/ApproxMVBB-version")
+find_package(ApproxMVBB REQUIRED)
 
 generate_dynamic_reconfigure_options(cfg/FakeObjectRecognition.cfg)
 include_directories(${dynamic_reconfigure_PACKAGE_PATH}/cmake/cfgbuild.cmake)
@@ -70,6 +73,7 @@ include_directories(
       ${Eigen_INCLUDE_DIRS}
       ${PCL_INCLUDE_DIRS}
       ${catkin_INCLUDE_DIRS}
+      ${ApproxMVBB_INCLUDE_DIR}
 )
 
 link_directories(${catkin_LIBRARY_DIRS})
@@ -84,6 +88,7 @@ add_executable(asr_fake_object_recognition src/fake_object_recognition.cpp
 TARGET_LINK_LIBRARIES(asr_fake_object_recognition
       ${catkin_LIBRARIES}
       ${PCL_LIBRARIES}
+      ${ApproxMVBB_LIBRARIES}
 )
 
 add_dependencies(asr_fake_object_recognition
@@ -92,6 +97,6 @@ add_dependencies(asr_fake_object_recognition
         ${${PROJECT_NAME}_EXPORTED_TARGETS}
         asr_msgs_generate_messages_cpp
         asr_object_database
-        asr_approx_mvbb
+        ${ApproxMVBB_DEPENDING_TARGETS}
 )
 
