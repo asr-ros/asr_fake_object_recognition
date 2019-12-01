@@ -45,7 +45,7 @@ include_directories(${EIGEN3_INCLUDE_DIRS})
 
 # only set this variable if ApproxMVBB is not installed system-wide
 # set(ApproxMVBB_DIR "path/to/ApproxMVBB/Build/Directory/install/lib/cmake/ApproxMVBB-version")
-find_package(ApproxMVBB REQUIRED)
+find_package(ApproxMVBB 1 REQUIRED)
 
 generate_dynamic_reconfigure_options(cfg/FakeObjectRecognition.cfg)
 include_directories(${dynamic_reconfigure_PACKAGE_PATH}/cmake/cfgbuild.cmake)
@@ -64,7 +64,7 @@ generate_messages(
 catkin_package(
     INCLUDE_DIRS include
     CATKIN_DEPENDS dynamic_reconfigure std_msgs roscpp roslib asr_msgs asr_rapidxml
-    DEPENDS EIGEN3
+    DEPENDS EIGEN3 ApproxMVBB
 )
 
 
