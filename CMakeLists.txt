@@ -44,12 +44,12 @@ endif()
 include_directories(${EIGEN3_INCLUDE_DIRS})
 
 include(ExternalProject)
-set(EXTERNAL_INSTALL_LOCATION ${CMAKE_BINARY_DIR}/external)
+set(EXTERNAL_LOCATION ${CATKIN_DEVEL_PREFIX}/external/ApproxMVBB)
 
 ExternalProject_Add(approx_mvbb
     GIT_REPOSITORY https://github.com/gabyx/ApproxMVBB.git
     GIT_TAG a819dd1ab4d00fd78663e7d97dd42d30313f4549
-    CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${EXTERNAL_INSTALL_LOCATION}
+    BINARY_DIR ${EXTERNAL_LOCATION}
 )
 
 
@@ -79,11 +79,11 @@ include_directories(
       ${Eigen_INCLUDE_DIRS}
       ${PCL_INCLUDE_DIRS}
       ${catkin_INCLUDE_DIRS}
-      ${EXTERNAL_INSTALL_LOCATION}/include
+      ${EXTERNAL_LOCATION}/install/include
 )
 
 link_directories(${catkin_LIBRARY_DIRS})
-link_directories(${EXTERNAL_INSTALL_LOCATION}/lib)
+link_directories(${EXTERNAL_LOCATION}/install/lib)
 
 FILE(GLOB_RECURSE LIBFILES "include/*.h")
 add_executable(asr_fake_object_recognition src/fake_object_recognition.cpp
