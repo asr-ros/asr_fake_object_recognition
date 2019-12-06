@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.0.2)
 project(asr_fake_object_recognition)
 
 # C++11 is needed
@@ -43,9 +43,15 @@ endif()
 
 include_directories(${EIGEN3_INCLUDE_DIRS})
 
-# only set this variable if ApproxMVBB is not installed system-wide
-# set(ApproxMVBB_DIR "path/to/ApproxMVBB/Build/Directory/install/lib/cmake/ApproxMVBB-version")
-find_package(ApproxMVBB 1 REQUIRED)
+include(ExternalProject)
+set(EXTERNAL_INSTALL_LOCATION ${CMAKE_BINARY_DIR}/external)
+
+ExternalProject_Add(approx_mvbb
+    GIT_REPOSITORY https://github.com/gabyx/ApproxMVBB.git
+    GIT_TAG a819dd1ab4d00fd78663e7d97dd42d30313f4549
+    CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${EXTERNAL_INSTALL_LOCATION}
+)
+
 
 generate_dynamic_reconfigure_options(cfg/FakeObjectRecognition.cfg)
 include_directories(${dynamic_reconfigure_PACKAGE_PATH}/cmake/cfgbuild.cmake)
@@ -73,10 +79,11 @@ include_directories(
       ${Eigen_INCLUDE_DIRS}
       ${PCL_INCLUDE_DIRS}
       ${catkin_INCLUDE_DIRS}
-      ${ApproxMVBB_INCLUDE_DIR}
+      ${EXTERNAL_INSTALL_LOCATION}/include
 )
 
 link_directories(${catkin_LIBRARY_DIRS})
+link_directories(${EXTERNAL_INSTALL_LOCATION}/lib)
 
 FILE(GLOB_RECURSE LIBFILES "include/*.h")
 add_executable(asr_fake_object_recognition src/fake_object_recognition.cpp
@@ -88,7 +95,7 @@ add_executable(asr_fake_object_recognition src/fake_object_recognition.cpp
 TARGET_LINK_LIBRARIES(asr_fake_object_recognition
       ${catkin_LIBRARIES}
       ${PCL_LIBRARIES}
-      ${ApproxMVBB_LIBRARIES}
+      ApproxMVBB
 )
 
 add_dependencies(asr_fake_object_recognition
@@ -97,6 +104,6 @@ add_dependencies(asr_fake_object_recognition
         ${${PROJECT_NAME}_EXPORTED_TARGETS}
         asr_msgs_generate_messages_cpp
         asr_object_database
-        ${ApproxMVBB_DEPENDING_TARGETS}
+        approx_mvbb
 )
 
