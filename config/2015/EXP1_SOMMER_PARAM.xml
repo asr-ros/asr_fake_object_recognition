@@ -1,6 +1,0 @@
-<Objects>
-<Object type="Knaeckebrot" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/Knaeckebrot/Knaeckebrot.dae" angles="quaternion">-0.0831926,0.787348,0.705691,0.57383,-0.569348,-0.42073,0.411762</Object>
-<Object type="Smacks" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/Smacks/Smacks.dae" angles="quaternion">-0.58582,0.495014,0.786433,0.599042,-0.579757,0.402269,-0.378432</Object>
-<Object type="VitalisSchoko" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/VitalisSchoko/VitalisSchoko.dae" angles="quaternion">-0.188009,0.682787,0.74663,0.588808,-0.600667,-0.393664,0.370855</Object>
-<Object type="CoffeeBox" id="0" mesh="package://asr_object_database/rsc/databases/textured_objects/CoffeeBox/CoffeeBox.dae" angles="quaternion">-0.399521,0.648461,0.687763,0.701766,-0.708298,-0.0518195,0.0561499</Object>
-</Objects>

@@ -1,0 +1,7 @@
+<!--Object configuration corresponding to the scene category in office2016.sqlite in asr_ism.-->
+<Objects>
+<Object type="marker_11" id="0" mesh="package://asr_object_database/rsc/databases/marker/marker_11/tastatur.dae" angles="quaternion">0.728752,-0.176428,-0.59705,-0.32565,0.302576,-0.603095,0.662327 </Object>
+<Object type="marker_12" id="0" mesh="package://asr_object_database/rsc/databases/marker/marker_12/maus.dae" angles="quaternion">0.597412,-0.293843,-0.603745,0.332431,-0.344262,0.637239,-0.60407 </Object>
+<Object type="marker_13" id="0" mesh="package://asr_object_database/rsc/databases/marker/marker_13/monitor.dae" angles="quaternion">1.07505,-0.0739926,-0.517957,-0.436806,-0.021173,0.00366398,0.899299 </Object>
+<Object type="marker_14" id="0" mesh="package://asr_object_database/rsc/databases/marker/marker_14/monitor.dae" angles="quaternion">0.796311,-0.431061,-0.532757,-0.452121,-0.0054199,-0.00164617,0.891938 </Object>
+</Objects>
