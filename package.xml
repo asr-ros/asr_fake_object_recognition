@@ -2,7 +2,7 @@
 <package>
   <name>asr_fake_object_recognition</name>
   <version>1.0.0</version>
-  <description>This package contains a simulated object recognizer which published objects based on preset poses and the current camera frames</description>
+  <description>This package provides a 'perception algorithm'-independent simulation of 6-D object localization for 3D object search by a mobile robot: Based on the poses of the searched objects with respect to the viewing frustum(s) of the robot, the detectability of the objects is estimated.</description>
   <author>Allgeyer Tobias, Aumann Florian, Borella Jocelyn, Meißner Pascal, Qattan Mohamad</author>
   <maintainer email="asr-ros@lists.kit.edu">Meißner Pascal</maintainer>
   <license>BSD</license>
